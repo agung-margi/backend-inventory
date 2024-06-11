@@ -2,13 +2,12 @@ const { DataTypes } = require('sequelize');
 const db = require('../config/database');
 const User = require('./userModel');
 const Product = require('./productModel');
-const generateTransactionId = require('../utils/transactionUtils')
 
 const Transaction = db.define('transactions', {
   id: {
     type: DataTypes.STRING,
+    defaultValue: DataTypes.UUIDV1,
     primaryKey: true,
-    defaultValue: generateTransactionId,
   },
   userId: {
     type: DataTypes.UUID,
@@ -34,7 +33,9 @@ const Transaction = db.define('transactions', {
     type: DataTypes.STRING,
     allowNull: false
   },
-}, { timestamps: true });
+}, {
+  timestamps: true,
+});
 
 
 Transaction.belongsTo(Product, { foreignKey: 'productId' });

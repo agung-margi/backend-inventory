@@ -5,12 +5,15 @@ const {
   getAllTransaction,
   getDetailsTransaction,
   createTransaction,
+  updateTransaction,
+  deleteTransaction
 } = require("../controllers/transactionController");
 
 
-route.get("/transaction", getAllTransaction);
-route.get("/transaction/:id", getDetailsTransaction);
-route.post("/transaction", createTransaction);
-
+route.get("/transaction", authMiddleware, getAllTransaction);
+route.get("/transaction/:id", authMiddleware, isAdmin, getDetailsTransaction);
+route.post("/transaction", authMiddleware, isAdmin, createTransaction);
+route.put("/transaction/:id", authMiddleware, isAdmin, updateTransaction);
+route.delete("/transaction/:id", authMiddleware, isAdmin, deleteTransaction);
 
 module.exports = route;
