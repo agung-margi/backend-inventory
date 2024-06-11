@@ -4,7 +4,7 @@ const { isAdmin, checkProfileOwnership } = require("../middlewares/authorization
 const { getAllUser, createUser, updateUser, deleteUser, login, logout, getUserById, getProfile } = require("../controllers/userController");
 
 
-router.get("/user", authMiddleware, isAdmin, getAllUser);
+router.get("/user",  getAllUser);
 router.get("/user/:id", authMiddleware, getUserById);
 router.post("/user", authMiddleware, createUser);
 router.put("/user/:id", authMiddleware, updateUser);
